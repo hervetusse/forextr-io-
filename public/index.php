@@ -27,8 +27,9 @@ $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
 */
 $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
 
-    $request_data = $request->getParsedBody(); 
-    $text = $request_data->result->resolvedQuery;
+    $request_data = file_get_contents('php://input');
+    $json = json_decode($request_data);
+    $text = $json->result->resolvedQuery;
 
 
     $responseText = prepareResponse($text);
