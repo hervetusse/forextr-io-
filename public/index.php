@@ -40,8 +40,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
         $response->speech = $responseText;
         $response->displayText = $responseText;
         $response->source = "webhook";
-        echo json_encode($response);
-        exit;
+        return json_encode($response);
         $symbol = $request_data['symbol'];
         $currency = $request_data['currency'];
 
