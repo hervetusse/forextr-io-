@@ -88,7 +88,7 @@ function prepareResponse($text, $currency, $amt){
         // do something on exception
         }
     
-    return $data;
+    return $data->rates;
 }
 
 
