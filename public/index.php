@@ -87,8 +87,8 @@ function prepareResponse($text, $currency, $amt){
         } catch(Exception $e) {
         // do something on exception
         }
-    
-    var_dump(json_decode($data['rates']));
+    $rate = json_decode($data)
+    var_dump(rate);
 
     exit;
 }
