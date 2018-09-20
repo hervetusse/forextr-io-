@@ -92,7 +92,7 @@ function haveEmptyParameters($required_params, $request, $response){
     return $error; 
 }
 
-function prepareResponse($intent, $text){
+function prepareResponse($text){
     return "You said: " . $text ;
 }
 
