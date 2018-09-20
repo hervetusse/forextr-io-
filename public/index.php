@@ -32,7 +32,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $text = $json->result->resolvedQuery;
 
     $currency = (!empty($json->result->parameters->currency-from)) ? $json->result->parameters->currency-from : '';
-    $amt  = (!empty($json->result->parameters->cuisine)) ? $json->result->parameters->amount : '';
+    $amt  = (!empty($json->result->parameters->amount)) ? $json->result->parameters->amount : '';
 
 
     $responseText = prepareResponse($text, $currency, $amt);
