@@ -91,7 +91,7 @@ function prepareResponse($text, $currency, $amt){
         $rate = json_decode($data);
         $rate = $rate->rates->ZAR;
 
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $rate;
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . (!empty($amt)) ? $amt * $rate : $rate . ' rand';
 }
 
 
