@@ -31,10 +31,9 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $json = json_decode($request_data);
     $text = $json->result->resolvedQuery;
 
-    $currency = (!empty($json->result->parameters->currencyfrom)) ? $json->result->parameters->currencyfrom : '';
     $amt  = (!empty($json->result->parameters->amount)) ? $json->result->parameters->amount : '';
-
-
+    $currency = (!empty($json->result->parameters->currencyfrom)) ? $json->result->parameters->currencyfrom : '';
+    
     $responseText = prepareResponse($text, $currency, $amt);
     
     $response = new \stdClass();
