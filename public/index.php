@@ -74,7 +74,7 @@ function prepareResponse($text, $currency, $amt){
 
     try {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://ratesapi.io/api/latest?base=$currency&symbols=ZAR");
+        curl_setopt($ch, CURLOPT_URL, "https://ratesapi.io/api/latest?base=$currency&symbols=$symbol");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TCP_KEEPALIVE, 1);
         curl_setopt($ch, CURLOPT_TCP_KEEPIDLE, 2);
@@ -87,10 +87,9 @@ function prepareResponse($text, $currency, $amt){
         } catch(Exception $e) {
         // do something on exception
         }
-    $rate = json_decode($data);
-    var_dump($rate->rates->ZAR);
-
-    exit;
+        $rate = json_decode($data);
+        
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $rate->rates->ZAR;
 }
 
 
