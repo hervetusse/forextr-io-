@@ -87,9 +87,10 @@ function prepareResponse($text, $currency, $amt){
         } catch(Exception $e) {
         // do something on exception
         }
-        $rate = json_decode($data);
-        
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $rate->rates->ZAR;
+
+        $rate = json_decode($data)->rates->ZAR;
+
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $rate;
 }
 
 
