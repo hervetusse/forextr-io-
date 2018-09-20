@@ -42,36 +42,6 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $response->displayText = $responseText;
     $response->source = "webhook";
     return json_encode($response);
-
-    if(!haveEmptyParameters(array('currency', 'symbol'), $request, $response)){
-
-        $symbol = $request_data['symbol'];
-        $currency = $request_data['currency'];
-
-        try {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "https://ratesapi.io/api/latest?base=$currency&symbols=$symbol");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TCP_KEEPALIVE, 1);
-            curl_setopt($ch, CURLOPT_TCP_KEEPIDLE, 2);
-            $data = curl_exec($ch);
-            if(curl_errno($ch)){
-                throw new Exception(curl_error($ch));
-            }
-            curl_close($ch);
-
-            $response->write($data);
-
-            return $response
-                        ->withHeader('Content-type', 'application/json')
-                        ->withStatus(201);
-          } catch(Exception $e) {
-            // do something on exception
-          }
-    }
-    return $response
-        ->withHeader('Content-type', 'application/json')
-        ->withStatus(422);    
 });
 
 
@@ -98,8 +68,36 @@ function haveEmptyParameters($required_params, $request, $response){
 }
 
 function prepareResponse($text, $currency, $amt){
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $currency ;
+
+    $symbol = $currency;
+    $amt = $request_data['currency'];
+    $data = '';
+
+    try {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://ratesapi.io/api/latest?base=$currency&symbols=$symbol");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TCP_KEEPALIVE, 1);
+        curl_setopt($ch, CURLOPT_TCP_KEEPIDLE, 2);
+        $data = curl_exec($ch);
+        if(curl_errno($ch)){
+            throw new Exception(curl_error($ch));
+        }
+        curl_close($ch);
+
+        } catch(Exception $e) {
+        // do something on exception
+        }
+
+return $response
+    ->withHeader('Content-type', 'application/json')
+    ->withStatus(422);    
+    
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $currency . ' The rate is: ' . $data->rates->ZAR;
 }
+
+
+
 
 $app->run();
 
