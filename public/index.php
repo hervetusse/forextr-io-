@@ -88,7 +88,7 @@ function prepareResponse($text, $currency, $amt){
         // do something on exception
         }
     
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $data->rates->ZAR;
+    return $data;
 }
 
 
