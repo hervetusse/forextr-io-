@@ -29,7 +29,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
 
     if(!haveEmptyParameters(array('currency', 'symbol'), $request, $response)){
         $request_data = $request->getParsedBody(); 
-        $json = json_decode($request_data);
+        $json = $request_data;
         $text = $json->result->resolvedQuery;
         $intent   = (!empty($json->result->metadata->intentName)) ? $json->result->metadata->intentName : '';
 
