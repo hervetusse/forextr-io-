@@ -89,7 +89,7 @@ function prepareResponse($text, $currency, $amt){
         }
 
         $rate = json_decode($data);
-        $rate = $rate['rates']->ZAR
+        $rate = $rate['rates']->ZAR;
 
         var_dump($rate);
 
