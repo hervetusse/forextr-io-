@@ -37,7 +37,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $response->speech = $responseText;
     $response->displayText = $responseText;
     $response->source = "webhook";
-    return json_encode($request_data);
+    return json_encode($text);
 
     if(!haveEmptyParameters(array('currency', 'symbol'), $request, $response)){
 
