@@ -28,7 +28,7 @@ $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
 $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
 
     $request_data = $request->getParsedBody(); 
-    $json = json_decode($request_data);
+    $json = $request_data;
     $text = $json->result->resolvedQuery;
 
 
@@ -38,7 +38,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $response->speech = $responseText;
     $response->displayText = $responseText;
     $response->source = "webhook";
-    return json_encode($text);
+    return json_encode($json->result);
 
     if(!haveEmptyParameters(array('currency', 'symbol'), $request, $response)){
 
