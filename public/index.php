@@ -31,10 +31,9 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
         $request_data = $request->getParsedBody(); 
         $json = $request_data;
         $text = $json->result->resolvedQuery;
-        $intent   = (!empty($json->result->metadata->intentName)) ? $json->result->metadata->intentName : '';
 
 
-        $responseText = prepareResponse($intent, $text);
+        $responseText = prepareResponse($text);
         
         $response = new \stdClass();
         $response->speech = $responseText;
@@ -94,7 +93,7 @@ function haveEmptyParameters($required_params, $request, $response){
 }
 
 function prepareResponse($intent, $text){
-    return "You said: " . $text . " | I found Intent: " . $intent;    
+    return "You said: " . $text ;
 }
 
 $app->run();
