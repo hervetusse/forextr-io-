@@ -100,8 +100,17 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
         $request_data = $request->getParsedBody(); 
         $json = json_decode($request_data);
         $text = $json->result->resolvedQuery;
+        $intent   = (!empty($json->result->metadata->intentName)) ? $json->result->metadata->intentName : '';
 
-        return "You said: " . $text . " | I found Intent: " . $intent;
+
+        $responseText = prepareResponse($intent, $text);
+        
+        $response = new \stdClass();
+        $response->speech = $responseText;
+        $response->displayText = $responseText;
+        $response->source = "webhook";
+        echo json_encode($response);
+        exit;
         $symbol = $request_data['symbol'];
         $currency = $request_data['currency'];
 
@@ -152,6 +161,10 @@ function haveEmptyParameters($required_params, $request, $response){
         $response->write(json_encode($error_detail));
     }
     return $error; 
+}
+
+function prepareResponse($intent, $text){
+    return "You said: " . $text . " | I found Intent: " . $intent;    
 }
 
 $app->run();
