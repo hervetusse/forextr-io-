@@ -88,10 +88,6 @@ function prepareResponse($text, $currency, $amt){
         } catch(Exception $e) {
         // do something on exception
         }
-
-return $response
-    ->withHeader('Content-type', 'application/json')
-    ->withStatus(422);    
     
     return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $currency . ' The rate is: ' . $data->rates->ZAR;
 }
