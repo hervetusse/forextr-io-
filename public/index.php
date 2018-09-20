@@ -92,7 +92,7 @@ function prepareResponse($text, $currency, $amt){
         $rate = $rate->rates->ZAR;
         $rate_amt = (!empty($amt)) ? $amt * $rate : $rate;
 
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . number_format((float)$rate_amt, 2, '.', '') . ' rand';
+    return ' The rate is: ' . number_format((float)$rate_amt, 2, '.', '') . ' rand';
 }
 
 
