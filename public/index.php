@@ -33,7 +33,7 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
 
     $amt  = (!empty($json->result->parameters->amount)) ? $json->result->parameters->amount : '';
     $currency = (!empty($json->result->parameters->currencyfrom)) ? $json->result->parameters->currencyfrom : '';
-    
+
     $responseText = prepareResponse($text, $currency, $amt);
     
     $response = new \stdClass();
@@ -69,7 +69,7 @@ function haveEmptyParameters($required_params, $request, $response){
 function prepareResponse($text, $currency, $amt){
 
     $symbol = $currency;
-    $amt = $request_data['currency'];
+    $amt = $amt;
     $data = '';
 
     try {
@@ -88,7 +88,7 @@ function prepareResponse($text, $currency, $amt){
         // do something on exception
         }
     
-    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $currency . ' The rate is: ' . $data->rates->ZAR;
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $data->rates->ZAR;
 }
 
 
