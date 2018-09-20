@@ -31,8 +31,11 @@ $app->post('/fetchCurrencyRate', function(Request $request, Response $response){
     $json = json_decode($request_data);
     $text = $json->result->resolvedQuery;
 
+    $currency = (!empty($json->result->parameters->currency-from)) ? $json->result->parameters->currency-from : '';
+    $amt  = (!empty($json->result->parameters->cuisine)) ? $json->result->parameters->amount : '';
 
-    $responseText = prepareResponse($text);
+
+    $responseText = prepareResponse($text, $currency, $amt);
     
     $response = new \stdClass();
     $response->speech = $responseText;
@@ -94,8 +97,8 @@ function haveEmptyParameters($required_params, $request, $response){
     return $error; 
 }
 
-function prepareResponse($text){
-    return "You said: " . $text ;
+function prepareResponse($text, $currency, $amt){
+    return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $currency ;
 }
 
 $app->run();
