@@ -89,11 +89,7 @@ function prepareResponse($text, $currency, $amt){
         }
 
         $rate = json_decode($data);
-        $rate = $rate['rates']->ZAR;
-
-        var_dump($rate);
-
-        exit;
+        $rate = $rate->rates->ZAR;
 
     return "You said: " . $text . ' Amount: ' . $amt . ' Currency: ' . $symbol . ' The rate is: ' . $rate;
 }
